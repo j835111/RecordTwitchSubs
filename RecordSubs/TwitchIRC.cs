@@ -26,7 +26,7 @@ namespace WebApplication.Models
 
         private void onReSubscriber(object sender, OnReSubscriberArgs e)
         {
-            string text = "[" + DateTime.Now.ToLongDateString() + "]" + " " + e.ReSubscriber.DisplayName + " " + e.ReSubscriber.SubscriptionPlanName + " " + e.ReSubscriber.Months + "\n";
+            string text = "[" + DateTime.Now + "]" + " " + e.ReSubscriber.DisplayName + " " + e.ReSubscriber.SubscriptionPlanName + " " + e.ReSubscriber.Months + "\n";
             byte[] by = Encoding.UTF8.GetBytes(text);
             fs.Write(by, 0, by.Length);
             fs.Close();
