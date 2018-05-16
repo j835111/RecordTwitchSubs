@@ -35,7 +35,10 @@ namespace RecordSubs
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            TwitchIRC irc = new TwitchIRC();
+            irc.Start(username.Text, twitchoauth.Text, channelname.Text);
+            state.Text = "Twitch聊天室連接中...\n";
+            state.Text += "訂閱紀錄中...";
         }
     }
 }

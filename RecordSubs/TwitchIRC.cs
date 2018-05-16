@@ -4,7 +4,7 @@ using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 
-namespace WebApplication.Models
+namespace RecordSubs
 {
     public class TwitchIRC
     {
