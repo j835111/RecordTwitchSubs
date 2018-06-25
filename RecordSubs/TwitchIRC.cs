@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using TwitchLib.Client;
+using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 using ServiceStack.Text;
@@ -27,18 +28,32 @@ namespace RecordSubs
 
         private void onReSubscriber(object sender, OnReSubscriberArgs e)
         {
-            string[] text = { DateTime.Now.ToString(), e.ReSubscriber.DisplayName, e.ReSubscriber.Login, e.ReSubscriber.SubscriptionPlanName, e.ReSubscriber.Months.ToString() };
+            string[] text = { DateTime.Now.ToString(), e.ReSubscriber.DisplayName, e.ReSubscriber.Login, SubscriptionEnumConvert(e.ReSubscriber.SubscriptionPlan), e.ReSubscriber.Months.ToString() };
             writer.Write(CsvSerializer.SerializeToCsv<string>(text));
             writer.Flush();
-            writer.Close();
         }
         
         private void onNewSubscriber(object sender, OnNewSubscriberArgs e)
         {
-            string[] text = { DateTime.Now.ToString(), e.Subscriber.DisplayName, e.Subscriber.Login, e.Subscriber.SubscriptionPlanName.ToString() };
+            string[] text = { DateTime.Now.ToString(), e.Subscriber.DisplayName, e.Subscriber.Login, SubscriptionEnumConvert(e.Subscriber.SubscriptionPlan) };
             writer.Write(CsvSerializer.SerializeToCsv<string>(text));
             writer.Flush();
-            writer.Close();
+        }
+
+        private string SubscriptionEnumConvert(SubscriptionPlan plan)
+        {
+            switch (plan)
+            {
+                case SubscriptionPlan.Prime:
+                    return "Prime";
+                case SubscriptionPlan.Tier1:
+                    return "4.99";
+                case SubscriptionPlan.Tier2:
+                    return "9.99";
+                case SubscriptionPlan.Tier3:
+                    return "24.99";
+            }
+            return "error";
         }
     }
 }
