@@ -42,7 +42,7 @@ namespace RecordSubs
             {
                 if (!File.Exists("SubsLog.csv"))
                 {
-                    string[] item = { "時間", "名稱", "ID", "訂閱z", "月數" };
+                    string[] item = { "時間", "名稱", "ID", "訂閱方案", "月數" };
                     StreamWriter writer = new StreamWriter("SubsLog.csv", true, new UTF8Encoding(true));
                     writer.Write(CsvSerializer.SerializeToCsv<string>(item));
                     writer.Flush();
